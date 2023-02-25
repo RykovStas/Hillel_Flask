@@ -31,5 +31,8 @@ def create_app(test_config=None):
     from . import first
     app.register_blueprint(first.bp)
 
+    from . import second
+    app.register_blueprint(second.bp)
+
 
     return app
