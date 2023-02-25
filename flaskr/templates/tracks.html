@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Track Count</title>
+</head>
+<body>
+    <h1>Track Count</h1>
+    {% if genre %}
+        <p>Number of tracks in {{ genre }} genre: {{ count }}</p>
+    {% else %}
+        <p>Total number of tracks: {{ count }}</p>
+    {% endif %}
+</body>
+</html>

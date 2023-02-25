@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tracks Duration</title>
+</head>
+<body>
+    <h1>Tracks Duration</h1>
+    <pre>
+    {% for track in tracks %}
+        {{ track.title }} - {{ track.length_ }} s
+    {% endfor %}
+    </pre>
+</body>
+</html>
