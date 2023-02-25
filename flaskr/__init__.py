@@ -59,4 +59,7 @@ def create_app(test_config=None):
         response = flask.jsonify(count=astronauts_count)
         return response
 
+    from . import db
+    db.init_app(app)
+
     return app
