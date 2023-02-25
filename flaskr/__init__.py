@@ -1,12 +1,6 @@
 import os
-import flask
-from flask import Flask, url_for, render_template, request
-from faker import Faker
-import pandas as pd
-import requests
+from flask import Flask
 
-
-fake = Faker()
 
 
 def create_app(test_config=None):
@@ -30,36 +24,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/requirements/')
-    def open_file():
-        with open('requirements.txt', 'r') as file:
-            text = file.read().splitlines()
-        return text
-
-    @app.route('/generate-users/')
-    def generate_users():
-        users = []
-        count = request.args.get('count', default=100, type=int)
-        for _ in range(count):
-            name = fake.name()
-            email = fake.email()
-            users.append({"name": name, "email": email})
-        return render_template('users.html', users=users)
-
-    @app.route('/mean/')
-    def mean():
-        dataset = pd.read_csv('hw.csv')
-        average = dataset.mean()
-        return f"Avarage height {round(average.values[1] * 2.54)}sm, Avarage weight {round(average.values[2] / 2.2)}kg"
-
-    @app.route('/space/')
-    def get_astronauts():
-        r = requests.get('http://api.open-notify.org/astros.json')
-        astronauts_count = r.json()['number']
-        response = flask.jsonify(count=astronauts_count)
-        return response
 
     from . import db
     db.init_app(app)
+
+    from . import first
+    app.register_blueprint(first.bp)
+
 
     return app
